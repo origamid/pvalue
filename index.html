@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Independent Samples - T Test (Two-Tailed)</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <main class="container">
+    <h1>Independent Samples - T Test (Two-Tailed)</h1>
+    <form id="form">
+      <div>
+        <label for="groupA">Group A</label>
+        <textarea name="groupA" id="groupA" placeholder="Each number per line, use only numbers"></textarea>
+      </div>
+      <div>
+        <label for="groupB">Group B</label>
+        <textarea name="groupB" id="groupB" placeholder="Each number per line, use only numbers"></textarea>
+      </div>
+    </form>
+    <section class="result">
+      <div class="resultA">
+        <p><b>Sample A:</b> <span class="sample"></span></p>
+        <p><b>Mean A:</b> <span class="mean"></span></p>
+      </div>
+      <div class="resultB">
+        <p><b>Sample B:</b> <span class="sample"></span></p>
+        <p><b>Mean B:</b> <span class="mean"></span></p>
+      </div>
+    </section>
+    <section id="result">
+      <p>P VALUE:</p>
+    </section>
+  </main>
+
+  <footer>
+    <a href="https://www.statisticshowto.datasciencecentral.com/independent-samples-t-test/" target="_blank">T Formula</a> |
+    <a href="https://github.com/jstat/jstat" target="_blank">Statistical Library</a>
+  </footer>
+
+  <script src="./jstat.min.js"></script>
+  <script src="./script.js"></script>
+</body>
+
+</html>
