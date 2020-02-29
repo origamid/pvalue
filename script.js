@@ -34,8 +34,8 @@ function calcT(qa, qb) {
   const sumB = qb.reduce((acc, i) => acc + i);
   const sqA = sumA * sumA;
   const sqB = sumB * sumB;
-  const meanA = Math.round(sumA / totalA);
-  const meanB = Math.round(sumB / totalB);
+  const meanA = sumA / totalA;
+  const meanB = sumB / totalB;
 
   const sqIndA = qa.map(i => i * i).reduce((acc, i) => acc + i);
   const sqIndB = qb.map(i => i * i).reduce((acc, i) => acc + i);
