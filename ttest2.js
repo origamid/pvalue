@@ -2,6 +2,10 @@ class tTest2 {
   constructor(dataA, dataB) {
     this.dataA = dataA;
     this.dataB = dataB;
+    this.a = this.getA();
+    this.b = this.getB();
+    this.t = this.getT();
+    this.p = this.getP();
   }
   calcSampleSumSqMeanSqInd(data) {
     const sample = data.length;
@@ -17,9 +21,9 @@ class tTest2 {
       sqInd
     };
   }
-  t() {
-    const a = this.a();
-    const b = this.b();
+  getT() {
+    const a = this.getA();
+    const b = this.getB();
     const p1a = a.sqInd - a.sq / a.sample;
     const p1b = b.sqInd - b.sq / b.sample;
     const p2 = (p1a + p1b) / (a.sample + b.sample - 2);
@@ -27,23 +31,27 @@ class tTest2 {
     const t = (a.mean - b.mean) / Math.sqrt(p3);
     return t;
   }
-  p() {
+  getP() {
     if (window.jStat) {
-      const p = jStat.ttest(this.t(), this.a().sample + this.b().sample, 2);
+      const p = jStat.ttest(
+        this.getT(),
+        this.getA().sample + this.getB().sample,
+        2
+      );
       return +p.toFixed(5);
     } else {
       console.error("Library jStat needed: https://github.com/jstat/jstat");
       return NaN;
     }
   }
-  a() {
+  getA() {
     if (this.dataA.length > 0) {
       return this.calcSampleSumSqMeanSqInd(this.dataA);
     } else {
       return [];
     }
   }
-  b() {
+  getB() {
     if (this.dataB.length > 0) {
       return this.calcSampleSumSqMeanSqInd(this.dataB);
     } else {
@@ -51,7 +59,7 @@ class tTest2 {
     }
   }
   valid() {
-    return !isNaN(this.t()) && !isNaN(this.p());
+    return !isNaN(this.getT()) && !isNaN(this.getP());
   }
 }
 window.tTest2 = tTest2;

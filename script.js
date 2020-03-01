@@ -48,10 +48,10 @@ function distributeMean(className, data) {
 }
 
 function showResults(test) {
-  const p = test.p();
+  const p = test.p;
 
-  distributeMean(".resultA", test.a());
-  distributeMean(".resultB", test.b());
+  distributeMean(".resultA", test.a);
+  distributeMean(".resultB", test.b);
 
   const result = document.getElementById("result");
 
@@ -87,7 +87,7 @@ function handleForm() {
   const dataB = valueToNumbers("groupB");
   const test = new tTest2(dataA, dataB);
   if (test.valid()) {
-    console.log("T: " + test.t(), "P: " + test.p());
+    console.log("T: " + test.t, "P: " + test.p);
     console.log(dataA);
     console.log(dataB);
     showResults(test, dataA, dataB);
