@@ -27,29 +27,6 @@ function populateData() {
 }
 populateData();
 
-function calcT(qa, qb) {
-  const totalA = qa.length;
-  const totalB = qb.length;
-  const sumA = qa.reduce((acc, i) => acc + i);
-  const sumB = qb.reduce((acc, i) => acc + i);
-  const sqA = sumA * sumA;
-  const sqB = sumB * sumB;
-  const meanA = sumA / totalA;
-  const meanB = sumB / totalB;
-
-  const sqIndA = qa.map(i => i * i).reduce((acc, i) => acc + i);
-  const sqIndB = qb.map(i => i * i).reduce((acc, i) => acc + i);
-
-  const p1 = sqIndA - sqA / totalA + (sqIndB - sqB / totalB);
-  const p2 = p1 / (totalA + totalB - 2);
-  const p3 = p2 * (1 / totalA + 1 / totalB);
-  const p4 = Math.sqrt(p3);
-  const t = (meanA - meanB) / p4;
-  const dFree = totalA - 1 + totalB - 1;
-
-  return [t, dFree];
-}
-
 function valueToNumbers(id) {
   const group = document.getElementById(id);
   return group.value
@@ -61,20 +38,22 @@ function valueToNumbers(id) {
     .filter(n => !isNaN(n));
 }
 
-function distributeMean(className, value) {
+function distributeMean(className, data) {
   const element = document.querySelector(className);
   const sample = element.querySelector(".sample");
   const mean = element.querySelector(".mean");
 
-  const meanValue = +value.reduce((acc, i) => acc + i) / value.length;
-
-  sample.innerText = value.length;
-  mean.innerText = meanValue.toFixed(2);
+  sample.innerText = data.sample ? data.sample : 0;
+  mean.innerText = data.mean ? data.mean : 0;
 }
 
-function showResults(p, valueA, valueB) {
-  distributeMean(".resultA", valueA);
-  distributeMean(".resultB", valueB);
+function showResults(test) {
+  const p = test.p();
+
+  distributeMean(".resultA", test.a());
+  distributeMean(".resultB", test.b());
+
+  const result = document.getElementById("result");
 
   if (p > 0.05) {
     result.innerHTML = `
@@ -95,21 +74,25 @@ function showResults(p, valueA, valueB) {
   }
 }
 
+function cleanResults() {
+  const result = document.getElementById("result");
+  result.innerHTML = `<div><p class="pvalue"></p></div>`;
+  distributeMean(".resultA", []);
+  distributeMean(".resultB", []);
+}
+
 function handleForm() {
   saveData();
-  const valueA = valueToNumbers("groupA");
-  const valueB = valueToNumbers("groupB");
-  let t;
-  if (valueA.length > 0 && valueB.length > 0) {
-    t = calcT(valueA, valueB);
-    console.log("t: " + t[0]);
-    console.log("A: " + valueA);
-    console.log("B: " + valueB);
-  }
-
-  if (t && !isNaN(t[0])) {
-    const p = jStat.ttest(t[0], valueA.length + valueB.length, 2);
-    showResults(+p.toFixed(5), valueA, valueB);
+  const dataA = valueToNumbers("groupA");
+  const dataB = valueToNumbers("groupB");
+  const test = new tTest2(dataA, dataB);
+  if (test.valid()) {
+    console.log("T: " + test.t(), "P: " + test.p());
+    console.log(dataA);
+    console.log(dataB);
+    showResults(test, dataA, dataB);
+  } else {
+    cleanResults();
   }
 }
 handleForm();
