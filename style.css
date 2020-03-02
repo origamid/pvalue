@@ -9,6 +9,10 @@ body {
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
 }
 
+p {
+  margin: 0px;
+}
+
 h1 {
   font-size: 0.875rem;
   padding: 15px;
@@ -25,17 +29,15 @@ h1 {
 label {
   display: block;
   font-size: 0.75rem;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
   text-transform: uppercase;
   font-weight: bold;
 }
 
-form {
+#form {
   display: grid;
-  max-width: 760px;
-  margin: 30px auto 0px auto;
-  gap: 30px;
-  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  grid-template-rows: 1fr 1fr;
 }
 
 @media (max-width: 500px) {
@@ -44,15 +46,9 @@ form {
   }
 }
 
-form div {
-  height: 30vh;
-  display: grid;
-  grid-template-rows: auto 1fr;
-}
-
 textarea {
   width: 100%;
-  max-height: 100%;
+  height: 150px;
   border: 2px solid black;
   font-size: 1.1rem;
   padding: 10px;
@@ -68,46 +64,36 @@ textarea:focus {
 
 .container {
   max-width: 600px;
-  padding: 30px;
+  padding: 30px 30px 60px 30px;
   margin: 60px auto 20px auto;
   background: white;
-  min-height: 80vh;
   border-radius: 4px;
   box-shadow: 0 5px 20px 0 rgba(0, 0, 0, 0.1);
 }
 
-.result {
+.form-graph {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 30px;
-  font-size: 0.75rem;
-}
-
-.result p {
-  margin: 10px 0;
-}
-
-.result div {
+  margin-top: 30px;
+  gap: 20px;
+  grid-template-columns: 200px 1fr;
+  padding-bottom: 20px;
   border-bottom: 10px solid #ddd;
-  padding: 0px 10px;
 }
 
-.result div b {
-  /* width: 95px; */
-  display: inline-block;
-  text-transform: uppercase;
+#graph {
+  grid-column: 2;
 }
 
 .pvalue {
-  padding-bottom: 20px;
+  padding: 25px 0;
   border-bottom: 10px solid #ddd;
+  margin-bottom: 25px;
 }
 
 #result {
   font-weight: bold;
   font-size: 1.5rem;
   text-align: center;
-  /* border-bottom: 10px solid #ddd; */
 }
 
 .insignificant {
@@ -121,6 +107,7 @@ textarea:focus {
 .emoji {
   font-size: 2rem;
   letter-spacing: 10px;
+  margin-top: 25px;
 }
 
 footer {

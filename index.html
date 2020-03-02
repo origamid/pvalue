@@ -11,25 +11,18 @@
 <body>
   <main class="container">
     <h1>Independent Samples - T Test (Two-Tailed)</h1>
-    <form id="form">
-      <div>
-        <label for="groupA">Group A</label>
-        <textarea name="groupA" id="groupA" placeholder="Each number per line, use only numbers"></textarea>
-      </div>
-      <div>
-        <label for="groupB">Group B</label>
-        <textarea name="groupB" id="groupB" placeholder="Each number per line, use only numbers"></textarea>
-      </div>
-    </form>
-    <section class="result">
-      <div class="resultA">
-        <p><b>Sample A:</b> <span class="sample"></span></p>
-        <p><b>Mean A:</b> <span class="mean"></span></p>
-      </div>
-      <div class="resultB">
-        <p><b>Sample B:</b> <span class="sample"></span></p>
-        <p><b>Mean B:</b> <span class="mean"></span></p>
-      </div>
+    <section class="form-graph">
+      <form id="form">
+        <div>
+          <label for="groupA">Group A: <span class="sampleA"></span></label>
+          <textarea name="groupA" id="groupA" placeholder="Each number per line, use only numbers"></textarea>
+        </div>
+        <div>
+          <label for="groupB">Group B: <span class="sampleB"></span></label>
+          <textarea name="groupB" id="groupB" placeholder="Each number per line, use only numbers"></textarea>
+        </div>
+      </form>
+      <section id="graph"></section>
     </section>
     <section id="result">
       <p>P VALUE:</p>
@@ -39,9 +32,11 @@
   <footer>
     <a href="https://www.statisticshowto.datasciencecentral.com/independent-samples-t-test/" target="_blank">T Formula</a> |
     <a href="https://github.com/jstat/jstat" target="_blank">Statistical Library</a> |
+    <a href="https://plot.ly/javascript/" target="_blank">Plotly Js</a> |
     <a href="https://github.com/origamid/pvalue">Code</a>
   </footer>
 
+  <script src="./plotly-latest.min.js"></script>
   <script src="./jstat.min.js"></script>
   <script src="./ttest2.js"></script>
   <script src="./script.js"></script>

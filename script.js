@@ -38,20 +38,13 @@ function valueToNumbers(id) {
     .filter(n => !isNaN(n));
 }
 
-function distributeMean(className, data) {
-  const element = document.querySelector(className);
-  const sample = element.querySelector(".sample");
-  const mean = element.querySelector(".mean");
-
-  sample.innerText = data.sample ? data.sample : 0;
-  mean.innerText = data.mean ? data.mean : 0;
-}
-
 function showResults(test) {
   const p = test.p;
 
-  distributeMean(".resultA", test.a);
-  distributeMean(".resultB", test.b);
+  const sampleA = document.querySelector(".sampleA");
+  const sampleB = document.querySelector(".sampleB");
+  sampleA.innerText = test.a.sample;
+  sampleB.innerText = test.b.sample;
 
   const result = document.getElementById("result");
 
@@ -77,8 +70,6 @@ function showResults(test) {
 function cleanResults() {
   const result = document.getElementById("result");
   result.innerHTML = `<div><p class="pvalue"></p></div>`;
-  distributeMean(".resultA", []);
-  distributeMean(".resultB", []);
 }
 
 function handleForm() {
@@ -91,6 +82,7 @@ function handleForm() {
     console.log(dataA);
     console.log(dataB);
     showResults(test, dataA, dataB);
+    createGraphs(dataA, dataB);
   } else {
     cleanResults();
   }
@@ -100,3 +92,33 @@ handleForm();
 const form = document.getElementById("form");
 form.addEventListener("change", handleForm);
 form.addEventListener("keyup", handleForm);
+
+function createGraphs(a, b) {
+  const data = [
+    {
+      y: a,
+      type: "box",
+      name: "Group A",
+      marker: { color: "#000" },
+      boxmean: "sd"
+    },
+    {
+      y: b,
+      type: "box",
+      name: "Group B",
+      marker: { color: "#000" },
+      boxmean: "sd"
+    }
+  ];
+
+  Plotly.newPlot("graph", data, {
+    title: false,
+    showlegend: false,
+    margin: {
+      l: 40,
+      r: 40,
+      b: 40,
+      t: 40
+    }
+  });
+}
